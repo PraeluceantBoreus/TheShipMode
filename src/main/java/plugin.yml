@@ -1,0 +1,5 @@
+name: TheShipMode
+author: Richard Stöckl
+version: 0.0.1-NEPTUNIUM
+main: io.github.praeluceantboreus.theshipmode.main.TheShipModePlugin
+softdepend: [TheShipItems]
