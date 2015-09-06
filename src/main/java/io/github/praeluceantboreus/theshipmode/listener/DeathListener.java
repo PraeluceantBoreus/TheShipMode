@@ -24,10 +24,20 @@ public class DeathListener implements Listener
 		if (!manager.isInGame(victim))
 			return;
 		Player killer = victim.getKiller();
+		pde.setDeathMessage(null);
 		if (killer == null)
-		{
-			pde.setDeathMessage(null);
 			broadcast(DeathMessage.SUICID, victim, null);
+		else
+		{
+			if(manager.isHunterFrom(killer, victim))
+				broadcast(DeathMessage.HUNTER_SUCCESS, victim, killer);
+			else
+			{
+				if(manager.isHunterFrom(victim, killer))
+					broadcast(DeathMessage.VICTIM_KILLED_HUNTER, killer, victim);
+				else
+					broadcast(DeathMessage.RANDOM, victim, killer);
+			}
 		}
 	}
 
