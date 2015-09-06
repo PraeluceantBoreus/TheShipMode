@@ -3,6 +3,8 @@ package io.github.praeluceantboreus.theshipmode.manager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -10,6 +12,7 @@ import org.bukkit.entity.Player;
 public class GameManager
 {
 	private HashMap<Player, Player> players;
+	// <Hunter, Victim>
 	private boolean isStarted;
 
 	public GameManager()
@@ -26,6 +29,7 @@ public class GameManager
 	public void preparePlayer(Player player)
 	{
 		player.setGameMode(GameMode.ADVENTURE);
+		player.getInventory().setMaxStackSize(1);
 	}
 
 	public void shufflePlayers()
@@ -44,5 +48,30 @@ public class GameManager
 		players.put(player, victim);
 		playerList.remove(victim);
 		extendedShuffle(victim, playerList);
+	}
+
+	public boolean isStarted()
+	{
+		return isStarted;
+	}
+
+	public boolean isHunterFrom(Player hunter, Player victim)
+	{
+		return players.get(hunter) == victim;
+	}
+
+	public boolean isInGame(Player player)
+	{
+		return players.containsKey(player);
+	}
+
+	public void setOutOfRound(Player player)
+	{
+		players.put(player, null);
+	}
+
+	public Set<Player> getPlayers()
+	{
+		return new HashSet<>(players.keySet());
 	}
 }
