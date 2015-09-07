@@ -17,7 +17,7 @@ public class Camera implements ConfigurationSerializable
 	private Location location;
 	private double radius;
 
-	private Camera(boolean isEntity, EntityType entityType, Material materialType, Location location, double radius)
+	public Camera(boolean isEntity, EntityType entityType, Material materialType, Location location, double radius)
 	{
 		super();
 		this.isEntity = isEntity;
