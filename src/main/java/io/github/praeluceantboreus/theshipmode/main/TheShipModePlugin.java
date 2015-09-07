@@ -5,6 +5,8 @@ import io.github.praeluceantboreus.theshipmode.config.DeathMessage;
 import io.github.praeluceantboreus.theshipmode.config.MessageReceiver;
 import io.github.praeluceantboreus.theshipmode.listener.DeathMessageKey;
 
+import java.io.File;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,7 +44,10 @@ public class TheShipModePlugin extends JavaPlugin
 		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.KILLER), "Du bist von deinem Opfer " + DeathMessageKey.DEAD_PLAYER.getKey() + " ermordet worden!");
 		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.VICTIM), "Sehr gut, du hast deinen Mörder " + DeathMessageKey.KILLER.getKey() + " getötet");
 		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.OTHERS), DeathMessageKey.DEAD_PLAYER.getKey() + " ist von " + DeathMessageKey.KILLER.getKey() + " aus Notwehr ermordet worden!");
-	
+
+		getConfig().addDefault("main.maps.container", getDataFolder().toURI().relativize(new File(getDataFolder() + "/maps").toURI()));
+		getConfig().addDefault("main.maps.temp", getDataFolder().toURI().relativize(new File(getDataFolder() + "/temp").toURI()));
+
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 	}
