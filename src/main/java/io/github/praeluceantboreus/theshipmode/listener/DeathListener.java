@@ -33,7 +33,7 @@ public class DeathListener implements Listener
 				broadcast(DeathMessage.HUNTER_SUCCESS, victim, killer);
 			else
 			{
-				if(manager.isHunterFrom(victim, killer))
+				if(manager.isHunterFrom(killer, victim))
 					broadcast(DeathMessage.VICTIM_KILLED_HUNTER, killer, victim);
 				else
 					broadcast(DeathMessage.RANDOM, victim, killer);

@@ -41,7 +41,7 @@ public class TheShipModePlugin extends JavaPlugin
 
 		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.KILLER), "Du bist von deinem Opfer " + DeathMessageKey.DEAD_PLAYER.getKey() + " ermordet worden!");
 		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.VICTIM), "Sehr gut, du hast deinen Mörder " + DeathMessageKey.KILLER.getKey() + " getötet");
-		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.OTHERS), DeathMessageKey.KILLER.getKey() + " ist von " + DeathMessageKey.DEAD_PLAYER + " aus Notwehr ermordet worden!");
+		getConfig().addDefault(DeathMessage.VICTIM_KILLED_HUNTER.getKey(MessageReceiver.OTHERS), DeathMessageKey.DEAD_PLAYER.getKey() + " ist von " + DeathMessageKey.KILLER.getKey() + " aus Notwehr ermordet worden!");
 	
 		getConfig().options().copyDefaults(true);
 		saveConfig();
