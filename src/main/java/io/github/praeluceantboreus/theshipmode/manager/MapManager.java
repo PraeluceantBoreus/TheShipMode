@@ -21,17 +21,20 @@ public class MapManager
 	public World loadMap(String id)
 	{
 		long idTime = System.currentTimeMillis();
+		File worldTarget = new File(plugin.getDataFolder().getParentFile().getParentFile() + "/" + plugin.getConfig().getString("main.maps.temp") + "/" + idTime);
 		try
 		{
-			Files.copy(new File(plugin.getDataFolder().getParentFile().getParentFile() + "/" + plugin.getConfig().getString("main.maps.container") + "/" + id), new File(plugin.getDataFolder().getParentFile().getParentFile() + "/" + plugin.getConfig().getString("main.maps.temp") + "/" + id));
+			Files.copy(new File(plugin.getDataFolder().getParentFile().getParentFile() + "/" + plugin.getConfig().getString("main.maps.container") + "/" + id), worldTarget);
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WorldCreator wc = new WorldCreator(idTime + "");
+		WorldCreator wc = new WorldCreator(plugin.getDataFolder().getParentFile().getParentFile().toURI().relativize(worldTarget.toURI()).toString());
+		World world = wc.createWorld();
 		ConfigurationSection mapConf = plugin.getConfig().getConfigurationSection("maps." + id);
 		TheShipMap map = TheShipMap.deserialize(mapConf);
-		return null;
+		worlds.put(world, map);
+		return world;
 	}
 }
