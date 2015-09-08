@@ -5,8 +5,10 @@ import io.github.praeluceantboreus.theshipmode.manager.map.TheShipMap;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -54,6 +56,7 @@ public class MapManager
 			amount = (((int) (amount / 9)) + 1) * 9;
 		Inventory mapList = Bukkit.createInventory(null, amount);
 		mapList.setMaxStackSize(1);
+		final ArrayList<String> slotIds = new ArrayList<>();
 		for (String mapId : maps.getStringList(""))
 		{
 			ConfigurationSection cs = maps.getConfigurationSection(mapId);
@@ -61,7 +64,20 @@ public class MapManager
 			ItemMeta meta = Bukkit.getItemFactory().getItemMeta(icon.getType());
 			meta.setDisplayName(cs.getString("name"));
 			meta.setLore(Arrays.asList(new String[] { cs.getString("description") }));
+			icon.setItemMeta(meta);
+			mapList.addItem(icon);
+			slotIds.add(mapId);
 		}
 		player.setMetadata("listmaps", new LazyMetadataValue(plugin, null));
+		player.setMetadata("maps", new LazyMetadataValue(plugin, new Callable<Object>()
+		{
+
+			@Override
+			public ArrayList<String> call() throws Exception
+			{
+				return slotIds;
+			}
+		}));
+		player.openInventory(mapList);
 	}
 }
