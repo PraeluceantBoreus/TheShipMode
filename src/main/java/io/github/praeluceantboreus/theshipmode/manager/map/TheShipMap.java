@@ -1,6 +1,8 @@
 package io.github.praeluceantboreus.theshipmode.manager.map;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,6 +13,7 @@ public final class TheShipMap
 	// Also includes inspectors!
 	private HashSet<Container> containers;
 	private Location jail;
+	private ArrayList<Location> spawns;
 
 	private TheShipMap()
 	{
@@ -28,6 +31,8 @@ public final class TheShipMap
 			if (cam instanceof ConfigurationSection)
 				cameras.add(Inspector.deserialize((ConfigurationSection) cam));
 		Location jail = Location.deserialize(cs.getConfigurationSection("jail").getValues(true));
+		for(Map<?, ?> loc : cs.getMapList("spawnpoints"))
+		
 		TheShipMap ret = new TheShipMap();
 		ret.cameras = cameras;
 		ret.containers = containers;
