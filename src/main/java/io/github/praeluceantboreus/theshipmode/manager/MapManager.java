@@ -11,11 +11,13 @@ import java.util.HashMap;
 import java.util.concurrent.Callable;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -79,5 +81,10 @@ public class MapManager
 			}
 		}));
 		player.openInventory(mapList);
+	}
+
+	public void movePlayerToMap(Player player, World world)
+	{
+		player.teleport(new Location(world, 0, 0, 0), TeleportCause.UNKNOWN);
 	}
 }
