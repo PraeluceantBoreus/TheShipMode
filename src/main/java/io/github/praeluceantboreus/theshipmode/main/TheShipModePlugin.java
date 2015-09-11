@@ -3,7 +3,10 @@ package io.github.praeluceantboreus.theshipmode.main;
 import io.github.praeluceantboreus.theshipitems.main.TheShipItemsPlugin;
 import io.github.praeluceantboreus.theshipmode.config.DeathMessage;
 import io.github.praeluceantboreus.theshipmode.config.MessageReceiver;
+import io.github.praeluceantboreus.theshipmode.listener.DeathListener;
 import io.github.praeluceantboreus.theshipmode.listener.DeathMessageKey;
+import io.github.praeluceantboreus.theshipmode.listener.MapChooseListener;
+import io.github.praeluceantboreus.theshipmode.manager.GameManager;
 
 import java.io.File;
 
@@ -24,7 +27,13 @@ public class TheShipModePlugin extends JavaPlugin
 		if (tsiPlugin instanceof TheShipItemsPlugin)
 			tsi = (TheShipItemsPlugin) tsiPlugin;
 		useTSI = tsi != null;
+		initListeners();
 		super.onEnable();
+	}
+
+	private void initListeners()
+	{
+		this.getServer().getPluginManager().registerEvents(new MapChooseListener(), this);
 	}
 
 	private void genConfig()

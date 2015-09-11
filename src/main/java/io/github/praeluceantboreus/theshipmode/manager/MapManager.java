@@ -29,6 +29,7 @@ public class MapManager
 {
 	private TheShipModePlugin plugin;
 	private HashMap<World, TheShipMap> worlds;
+	private HashMap<World, GameManager> games;
 
 	public World loadMap(String id)
 	{
@@ -47,6 +48,7 @@ public class MapManager
 		ConfigurationSection mapConf = plugin.getConfig().getConfigurationSection("maps." + id);
 		TheShipMap map = TheShipMap.deserialize(mapConf);
 		worlds.put(world, map);
+		games.put(world, new GameManager());
 		return world;
 	}
 

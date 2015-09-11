@@ -19,11 +19,13 @@ public final class TheShipMap
 	{
 
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public static TheShipMap deserialize(ConfigurationSection cs)
 	{
 		HashSet<Camera> cameras = new HashSet<>();
 		HashSet<Container> containers = new HashSet<>();
+		ArrayList<Location> spawns = new ArrayList<>();
 		for (Object cam : cs.getList("cameras"))
 			if (cam instanceof ConfigurationSection)
 				cameras.add(Camera.deserialize((ConfigurationSection) cam));
@@ -31,12 +33,13 @@ public final class TheShipMap
 			if (cam instanceof ConfigurationSection)
 				cameras.add(Inspector.deserialize((ConfigurationSection) cam));
 		Location jail = Location.deserialize(cs.getConfigurationSection("jail").getValues(true));
-		for(Map<?, ?> loc : cs.getMapList("spawnpoints"))
-		
+		for (Map<?, ?> loc : cs.getMapList("spawnpoints"))
+			spawns.add(Location.deserialize((Map<String, Object>) loc));
 		TheShipMap ret = new TheShipMap();
 		ret.cameras = cameras;
 		ret.containers = containers;
 		ret.jail = jail;
+		ret.spawns = spawns;
 		return ret;
 	}
 

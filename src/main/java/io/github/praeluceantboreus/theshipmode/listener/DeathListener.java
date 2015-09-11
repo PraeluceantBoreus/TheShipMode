@@ -17,6 +17,13 @@ public class DeathListener implements Listener
 	private GameManager manager;
 	private TheShipModePlugin plugin;
 
+	private DeathListener(GameManager manager, TheShipModePlugin plugin)
+	{
+		super();
+		this.manager = manager;
+		this.plugin = plugin;
+	}
+
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent pde)
 	{
@@ -29,11 +36,11 @@ public class DeathListener implements Listener
 			broadcast(DeathMessage.SUICID, victim, null);
 		else
 		{
-			if(manager.isHunterFrom(killer, victim))
+			if (manager.isHunterFrom(killer, victim))
 				broadcast(DeathMessage.HUNTER_SUCCESS, victim, killer);
 			else
 			{
-				if(manager.isHunterFrom(killer, victim))
+				if (manager.isHunterFrom(killer, victim))
 					broadcast(DeathMessage.VICTIM_KILLED_HUNTER, killer, victim);
 				else
 					broadcast(DeathMessage.RANDOM, victim, killer);
