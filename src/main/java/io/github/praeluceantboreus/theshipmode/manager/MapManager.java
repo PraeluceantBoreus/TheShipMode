@@ -48,7 +48,7 @@ public class MapManager
 		ConfigurationSection mapConf = plugin.getConfig().getConfigurationSection("maps." + id);
 		TheShipMap map = TheShipMap.deserialize(mapConf);
 		worlds.put(world, map);
-		games.put(world, new GameManager());
+		games.put(world, new GameManager(plugin));
 		return world;
 	}
 

@@ -17,7 +17,7 @@ public class DeathListener implements Listener
 	private GameManager manager;
 	private TheShipModePlugin plugin;
 
-	private DeathListener(GameManager manager, TheShipModePlugin plugin)
+	public DeathListener(GameManager manager, TheShipModePlugin plugin)
 	{
 		super();
 		this.manager = manager;

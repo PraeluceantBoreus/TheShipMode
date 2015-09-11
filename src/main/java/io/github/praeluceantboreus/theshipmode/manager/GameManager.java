@@ -20,10 +20,11 @@ public class GameManager
 	private boolean isStarted;
 	private TheShipModePlugin plugin;
 
-	public GameManager()
+	public GameManager(TheShipModePlugin plugin)
 	{
+		this.plugin = plugin;
 		players = new HashMap<>();
-		Bukkit.getPluginManager().registerEvents(new DeathListener(null, plugin), plugin);
+		Bukkit.getPluginManager().registerEvents(new DeathListener(this, this.plugin), plugin);
 	}
 
 	public void startGame()
