@@ -2,6 +2,7 @@ package io.github.praeluceantboreus.theshipmode.manager;
 
 import io.github.praeluceantboreus.theshipmode.listener.DeathListener;
 import io.github.praeluceantboreus.theshipmode.main.TheShipModePlugin;
+import io.github.praeluceantboreus.theshipmode.manager.map.TheShipMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,18 +12,29 @@ import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+/**
+ * represents an instance of a single game
+ * 
+ * @author richi
+ *
+ */
 public class GameManager
 {
 	private HashMap<Player, Player> players;
 	// <Hunter, Victim>
 	private boolean isStarted;
 	private TheShipModePlugin plugin;
+	private TheShipMap map;
+	private World world;
 
-	public GameManager(TheShipModePlugin plugin)
+	public GameManager(TheShipModePlugin plugin, TheShipMap map, World world)
 	{
 		this.plugin = plugin;
+		this.map = map;
+		this.world = world;
 		players = new HashMap<>();
 		Bukkit.getPluginManager().registerEvents(new DeathListener(this, this.plugin), plugin);
 	}

@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.concurrent.Callable;
 
 import org.bukkit.Bukkit;
@@ -28,8 +28,17 @@ import com.google.common.io.Files;
 public class MapManager
 {
 	private TheShipModePlugin plugin;
-	private HashMap<World, TheShipMap> worlds;
-	private HashMap<World, GameManager> games;
+	/*
+	 * private HashMap<World, TheShipMap> worlds;
+	 * private HashMap<World, GameManager> games;
+	 */
+	private HashSet<GameManager> games;
+
+	public MapManager(TheShipModePlugin plugin)
+	{
+		this.plugin = plugin;
+		games = new HashSet<>();
+	}
 
 	public World loadMap(String id)
 	{
@@ -47,8 +56,11 @@ public class MapManager
 		World world = wc.createWorld();
 		ConfigurationSection mapConf = plugin.getConfig().getConfigurationSection("maps." + id);
 		TheShipMap map = TheShipMap.deserialize(mapConf);
-		worlds.put(world, map);
-		games.put(world, new GameManager(plugin));
+		/*
+		 * worlds.put(world, map);
+		 * games.put(world, new GameManager(plugin));
+		 */
+		games.add(new GameManager(plugin, map, world));
 		return world;
 	}
 
